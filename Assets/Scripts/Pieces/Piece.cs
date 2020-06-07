@@ -4,13 +4,12 @@ using UnityEngine;
 
 public abstract class Piece : MonoBehaviour
 {
+	[HideInInspector]
+	public Movement movement;
 	public Tile tile;
+    public bool wasMoved;
 
 	void OnMouseDown() {
-		Debug.Log("Clickou em: " + transform);
-	}
-
-	private void Start() {
-		Board.instance.AddPiece(transform.parent.name, this);
+		Board.instance.tileClicked(this, transform.parent.GetComponent<Player>());
 	}
 }

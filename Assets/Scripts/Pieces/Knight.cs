@@ -4,5 +4,11 @@ using UnityEngine;
 
 public class Knight : Piece
 {
-
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
+    {
+        movement = new KnightMovement();
+    }
 }
