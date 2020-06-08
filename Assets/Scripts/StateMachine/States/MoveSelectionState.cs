@@ -9,11 +9,13 @@ public class MoveSelectionState : State
 		Debug.Log("MoveSelectionState");
 		List<Tile> moves = Board.instance.selectedPiece.movement.GetValidMoves();
 		Highlights.instance.SelectTiles(moves);
-        Board.instance.tileClicked += OnHighlightClicked;
+        InputController.instance.tileClicked += OnHighlightClicked;
+        InputController.instance.tileClicked += ReturnClicked;
 	}
     public override void Exit(){
         Highlights.instance.DeSelectTiles();
-        Board.instance.tileClicked -= OnHighlightClicked;
+        InputController.instance.tileClicked -= OnHighlightClicked;
+        InputController.instance.tileClicked -= ReturnClicked;
     }
 
     private void OnHighlightClicked(object sender, object args)
@@ -27,5 +29,9 @@ public class MoveSelectionState : State
         Debug.Log(tileClicked.pos);
         Board.instance.selectedHighlight = highlight;
         machine.ChangeTo<PieceMovementState>();
+    }
+
+    void ReturnClicked(object sender, object args){
+        machine.ChangeTo<PieceSelectionState>();
     }
 }

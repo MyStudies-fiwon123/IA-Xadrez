@@ -10,6 +10,6 @@ public abstract class Piece : MonoBehaviour
     public bool wasMoved;
 
 	void OnMouseDown() {
-		Board.instance.tileClicked(this, transform.parent.GetComponent<Player>());
+		InputController.instance.tileClicked(this, transform.parent.GetComponent<Player>());
 	}
 }

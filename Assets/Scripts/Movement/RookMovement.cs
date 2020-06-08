@@ -12,6 +12,8 @@ public class RookMovement : Movement
         moves.AddRange(UntilBlockedPath(new Vector2Int(0, 1), true, 99));
         moves.AddRange(UntilBlockedPath(new Vector2Int(0, -1), true, 99));
 
+        SetNormalMove(moves);
+
         return moves;
 	}
 

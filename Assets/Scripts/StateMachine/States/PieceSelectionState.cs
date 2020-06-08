@@ -6,14 +6,23 @@ using UnityEngine;
 public class PieceSelectionState : State
 {
 	public override void Enter() {
-		Board.instance.tileClicked += PieceClicked;
+		InputController.instance.tileClicked += PieceClicked;
+        SetColliders(true);
 	}
 
 	public override void Exit() {
-		Board.instance.tileClicked -= PieceClicked;
+		InputController.instance.tileClicked -= PieceClicked;
+        SetColliders(false);
 	}
 
-	private void PieceClicked(object sender, object args) {
+    private void SetColliders(bool state)
+    {
+        foreach(BoxCollider2D b in machine.curentlyPlaying.GetComponentsInChildren<BoxCollider2D>()){
+            b.enabled = state;
+        }
+    }
+
+    private void PieceClicked(object sender, object args) {
 		Piece piece = sender as Piece;
 		Player player = args as Player;
 		if (machine.curentlyPlaying == player) {
@@ -21,6 +30,6 @@ public class PieceSelectionState : State
 			Board.instance.selectedPiece = piece;
 			machine.ChangeTo<MoveSelectionState>();
 		}
-
 	}
+    
 }

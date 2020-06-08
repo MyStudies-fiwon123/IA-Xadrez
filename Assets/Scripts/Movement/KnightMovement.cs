@@ -14,6 +14,8 @@ public class KnightMovement : Movement
         moves.AddRange(GetMovement(new Vector2Int(1, 0)));
         moves.AddRange(GetMovement(new Vector2Int(-1, 0)));
 
+        SetNormalMove(moves);
+
         return moves;
     }
     List<Tile> GetMovement(Vector2Int direction)
