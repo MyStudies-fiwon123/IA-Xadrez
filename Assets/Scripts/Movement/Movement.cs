@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Movement : MonoBehaviour
 {
+    public float value;
     public abstract List<Tile> GetValidMoves();
 
     protected bool IsEnemy(Tile tile)

@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class KnightMovement : Movement
 {
+    public KnightMovement()
+    {
+        value = 3;
+    }
+
     public override List<Tile> GetValidMoves()
     {
         List<Tile> moves = new List<Tile>();
@@ -23,7 +28,8 @@ public class KnightMovement : Movement
         List<Tile> moves = new List<Tile>();
         Tile current = Board.instance.selectedPiece.tile;
         Tile temp = GetTile(current.pos + direction * 2);
-        if (temp != null){
+        if (temp != null)
+        {
             moves.AddRange(GetCurvedPart(temp.pos, new Vector2Int(direction.y, direction.x)));
         }
         return moves;
@@ -32,8 +38,8 @@ public class KnightMovement : Movement
     private IEnumerable<Tile> GetCurvedPart(Vector2Int pos, Vector2Int direction)
     {
         List<Tile> tiles = new List<Tile>();
-        Tile tile1 = GetTile(pos+direction);
-        Tile tile2 = GetTile(pos-direction);
+        Tile tile1 = GetTile(pos + direction);
+        Tile tile2 = GetTile(pos - direction);
         if (tile1 != null && (tile1.content == null) || IsEnemy(tile1))
             tiles.Add(tile1);
         if (tile2 != null && (tile2.content == null) || IsEnemy(tile2))
