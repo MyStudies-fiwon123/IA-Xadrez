@@ -36,7 +36,7 @@ public class KnightMovement : Movement
         Tile tile2 = GetTile(pos-direction);
         if (tile1 != null && (tile1.content == null) || IsEnemy(tile1))
             tiles.Add(tile1);
-        if (tile2 != null && (tile1.content == null) || IsEnemy(tile2))
+        if (tile2 != null && (tile2.content == null) || IsEnemy(tile2))
             tiles.Add(tile2);
         return tiles;
     }

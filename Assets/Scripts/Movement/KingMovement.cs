@@ -20,6 +20,7 @@ public class KingMovement : Movement
 
         SetNormalMove(moves);
 
+        moves.AddRange(Castling());
         return moves;
 	}
     List<Tile> Castling(){

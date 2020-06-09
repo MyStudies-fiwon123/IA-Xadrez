@@ -11,9 +11,9 @@ public class PieceMovementState : State
         Debug.Log("PlaceMovementState:");
         MoveType moveType = Board.instance.selectedHighlight.tile.moveType;
         ClearEnPassants();
-        
+
         TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
-        switch(Board.instance.selectedHighlight.tile.moveType){
+        switch(moveType){
             case MoveType.Normal:
                 NormalMove(tcs);
                 break;
@@ -30,7 +30,6 @@ public class PieceMovementState : State
                 Promotion(tcs);
                 break;
         }
-
 
         await tcs.Task;
         machine.ChangeTo<TurnEndState>();
@@ -60,8 +59,8 @@ public class PieceMovementState : State
     void EnPassant(TaskCompletionSource<bool> tcs){
         Piece pawn = Board.instance.selectedPiece;
         Vector2Int direction = pawn.tile.pos.y > Board.instance.selectedHighlight.tile.pos.y ?
-            new Vector2Int(0, -1) :
-            new Vector2Int(0, 1);
+            new Vector2Int(0, 1) :
+            new Vector2Int(0, -1);
         Tile enemy = Board.instance.tiles[Board.instance.selectedHighlight.tile.pos+direction];
         enemy.content.gameObject.SetActive(false);
         enemy.content = null;
@@ -94,7 +93,7 @@ public class PieceMovementState : State
                 tcs.SetResult(true);
             });
 
-        LeanTween.move(king.gameObject, new Vector3(rook.tile.pos.x, rook.tile.pos.y, 0), 1.4f);
+        LeanTween.move(rook.gameObject, new Vector3(rook.tile.pos.x, rook.tile.pos.y, 0), 1.4f);
     }
 
     void NormalMove(TaskCompletionSource<bool> tcs)

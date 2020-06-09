@@ -8,7 +8,7 @@ public abstract class Movement : MonoBehaviour
 
     protected bool IsEnemy(Tile tile)
     {
-        if (tile.content != null && tile.content.transform.parent != Board.instance.selectedPiece.transform.parent)
+        if (tile != null && tile.content != null && tile.content.transform.parent != Board.instance.selectedPiece.transform.parent)
         {
             return true;
         }

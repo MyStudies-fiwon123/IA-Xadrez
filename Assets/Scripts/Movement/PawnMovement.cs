@@ -17,6 +17,7 @@ public class PawnMovement : Movement
                 moves[1].moveType = MoveType.PawnDoubleMove;
         } else {
             moves = UntilBlockedPath(direction, false, 1);
+            SetNormalMove(moves);
         }
         moveable.AddRange(moves);
         CheckPromotion(moves);
@@ -54,7 +55,7 @@ public class PawnMovement : Movement
     {
         if (tile == null)
             return;
-        if (tile != null && IsEnemy(tile)){
+        if (IsEnemy(tile)){
             tile.moveType = MoveType.Normal;
             pawnAttack.Add(tile);
         } else if (tile.moveType == MoveType.EnPassant){

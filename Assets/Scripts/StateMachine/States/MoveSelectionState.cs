@@ -10,12 +10,12 @@ public class MoveSelectionState : State
 		List<Tile> moves = Board.instance.selectedPiece.movement.GetValidMoves();
 		Highlights.instance.SelectTiles(moves);
         InputController.instance.tileClicked += OnHighlightClicked;
-        InputController.instance.tileClicked += ReturnClicked;
+        InputController.instance.returnClicked += ReturnClicked;
 	}
     public override void Exit(){
         Highlights.instance.DeSelectTiles();
         InputController.instance.tileClicked -= OnHighlightClicked;
-        InputController.instance.tileClicked -= ReturnClicked;
+        InputController.instance.returnClicked -= ReturnClicked;
     }
 
     private void OnHighlightClicked(object sender, object args)
