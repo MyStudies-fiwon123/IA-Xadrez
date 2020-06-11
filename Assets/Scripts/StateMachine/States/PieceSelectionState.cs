@@ -17,7 +17,7 @@ public class PieceSelectionState : State
 
     private void SetColliders(bool state)
     {
-        foreach(BoxCollider2D b in machine.curentlyPlaying.GetComponentsInChildren<BoxCollider2D>()){
+        foreach(BoxCollider2D b in machine.currentlyPlaying.GetComponentsInChildren<BoxCollider2D>()){
             b.enabled = state;
         }
     }
@@ -25,7 +25,7 @@ public class PieceSelectionState : State
     private void PieceClicked(object sender, object args) {
 		Piece piece = sender as Piece;
 		Player player = args as Player;
-		if (machine.curentlyPlaying == player) {
+		if (machine.currentlyPlaying == player) {
 			Debug.Log(piece + " was clicked");
 			Board.instance.selectedPiece = piece;
 			machine.ChangeTo<MoveSelectionState>();

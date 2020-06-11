@@ -6,12 +6,12 @@ public class QueenMovement : Movement
 {
     public QueenMovement()
     {
-        value = 9;
+        value = 900;
     }
 
-    public override List<Tile> GetValidMoves()
+    public override List<AvailableMove> GetValidMoves()
     {
-        List<Tile> moves = new List<Tile>();
+        List<AvailableMove> moves = new List<AvailableMove>();
         moves.AddRange(UntilBlockedPath(new Vector2Int(1, 0), true, 99));
         moves.AddRange(UntilBlockedPath(new Vector2Int(-1, 0), true, 99));
 
@@ -22,8 +22,6 @@ public class QueenMovement : Movement
         moves.AddRange(UntilBlockedPath(new Vector2Int(1, -1), true, 99));
         moves.AddRange(UntilBlockedPath(new Vector2Int(-1, -1), true, 99));
         moves.AddRange(UntilBlockedPath(new Vector2Int(-1, 1), true, 99));
-
-        SetNormalMove(moves);
 
         return moves;
     }

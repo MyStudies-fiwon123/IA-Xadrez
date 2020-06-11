@@ -10,7 +10,7 @@ public class LoadState : State
 		Debug.Log("Ola");
 		await Board.instance.Load();
 		await LoadAllPiecesAsync();
-		machine.curentlyPlaying = machine.player2;
+		machine.currentlyPlaying = machine.player2;
 		machine.ChangeTo<TurnBeginState>();
 	}
 	async Task LoadAllPiecesAsync() {

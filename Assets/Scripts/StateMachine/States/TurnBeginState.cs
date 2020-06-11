@@ -5,15 +5,19 @@ using UnityEngine;
 
 public class TurnBeginState : State
 {
-	public override async void Enter() {
-		Debug.Log("Turn Begin:");
-		if (machine.curentlyPlaying == machine.player1)
-			machine.curentlyPlaying = machine.player2;
-		else
-			machine.curentlyPlaying = machine.player1;
+    public override async void Enter()
+    {
+        Debug.Log("Turn Begin:");
+        if (machine.currentlyPlaying == machine.player1)
+            machine.currentlyPlaying = machine.player2;
+        else
+            machine.currentlyPlaying = machine.player1;
 
-		Debug.Log(machine.curentlyPlaying+" now playing");
-		await Task.Delay(100);
-		machine.ChangeTo<PieceSelectionState>();
-	}
+        Debug.Log(machine.currentlyPlaying + " now playing");
+        await Task.Delay(100);
+        if (machine.currentlyPlaying.AIControlled)
+            machine.ChangeTo<AIPlayingState>();
+        else
+            machine.ChangeTo<PieceSelectionState>();
+    }
 }

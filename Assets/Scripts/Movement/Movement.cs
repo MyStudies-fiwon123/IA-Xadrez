@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class Movement : MonoBehaviour
 {
-    public float value;
-    public abstract List<Tile> GetValidMoves();
+    public int value;
+    public abstract List<AvailableMove> GetValidMoves();
 
     protected bool IsEnemy(Tile tile)
     {
@@ -22,17 +22,17 @@ public abstract class Movement : MonoBehaviour
         Board.instance.tiles.TryGetValue(position, out tile);
         return tile;
     }
-    protected List<Tile> UntilBlockedPath(Vector2Int direction, bool includeBlocked, int limit)
+    protected List<AvailableMove> UntilBlockedPath(Vector2Int direction, bool includeBlocked, int limit)
     {
-        List<Tile> moves = new List<Tile>();
+        List<AvailableMove> moves = new List<AvailableMove>();
         Tile current = Board.instance.selectedPiece.tile;
         while (current != null && moves.Count < limit){
             if (Board.instance.tiles.TryGetValue(current.pos + direction, out current)){
                 if (current.content == null){
-                    moves.Add(current);
+                    moves.Add(new AvailableMove(current.pos));
                 } else if (IsEnemy(current)){
                     if (includeBlocked)
-                        moves.Add(current);
+                        moves.Add(new AvailableMove(current.pos));
                     return moves;
                 } else{ // Era um aliado
                     return moves;
@@ -40,11 +40,5 @@ public abstract class Movement : MonoBehaviour
             }
         }
         return moves;
-    }
-
-    protected void SetNormalMove(List<Tile> tiles){
-        foreach (Tile t in tiles){
-            t.moveType = MoveType.Normal;
-        }
     }
 }

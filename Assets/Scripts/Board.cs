@@ -15,7 +15,7 @@ public class Board : MonoBehaviour
 	public List<Piece> goldPieces = new List<Piece>();
 	public List<Piece> greenPieces = new List<Piece>();
 	public Piece selectedPiece;
-	public HighlightClick selectedHighlight;
+	public AvailableMove selectedMove;
 
 	private void Awake() {
 		instance = this;

@@ -9,7 +9,7 @@ public class StateMachineController : MonoBehaviour
 	public static StateMachineController instance;
 	public Player player1;
 	public Player player2;
-	public Player curentlyPlaying;
+	public Player currentlyPlaying;
     public TaskCompletionSource<object> taskHold;
     public GameObject promotionPanel;
 	State _current;

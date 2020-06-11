@@ -11,15 +11,15 @@ public class Highlights : MonoBehaviour
 	private void Awake() {
 		instance = this;
 	}
-	public void SelectTiles(List<Tile> tiles) {
-		foreach(Tile t in tiles) {
+	public void SelectTiles(List<AvailableMove> tiles) {
+		foreach(AvailableMove move in tiles) {
 			if (onReserve.Count == 0)
 				CreateHighlight();
 			SpriteRenderer sr = onReserve.Dequeue();
 			sr.gameObject.SetActive(true);
-			sr.color = StateMachineController.instance.curentlyPlaying.color;
-			sr.transform.position = new Vector3(t.pos.x, t.pos.y, 0);
-            sr.GetComponent<HighlightClick>().tile = t;
+			sr.color = StateMachineController.instance.currentlyPlaying.color;
+			sr.transform.position = new Vector3(move.pos.x, move.pos.y, 0);
+            sr.GetComponent<HighlightClick>().move = move;
 			activeHighlights.Enqueue(sr);
 		}
 	}

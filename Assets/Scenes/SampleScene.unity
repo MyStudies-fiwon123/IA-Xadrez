@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 1, g: 0.75323707, b: 0, a: 1}
+  AIControlled: 0
 --- !u!1001 &75748589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2018,7 +2019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 69670889}
   player2: {fileID: 1568492068}
-  curentlyPlaying: {fileID: 0}
+  currentlyPlaying: {fileID: 0}
   promotionPanel: {fileID: 369621558}
 --- !u!4 &871767156
 Transform:
@@ -2278,7 +2279,6 @@ MonoBehaviour:
   goldPieces: []
   greenPieces: []
   selectedPiece: {fileID: 0}
-  selectedHighlight: {fileID: 0}
 --- !u!1001 &1371821566
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2684,6 +2684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0.36262476, g: 1, b: 0, a: 1}
+  AIControlled: 1
 --- !u!1001 &1614359150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2794,6 +2795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AIhighlight: {fileID: 781033833}
+  objectivePlyDepth: 2
 --- !u!4 &1615401903
 Transform:
   m_ObjectHideFlags: 0
