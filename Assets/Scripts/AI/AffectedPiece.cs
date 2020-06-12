@@ -13,7 +13,14 @@ public class AffectedPiece
         piece.tile.content = null;
         piece.tile = from;
         from.content = piece;
+    }
+}
+public class AffectedEnemy: AffectedPiece{
+    public int index;
+    public override void Undo(){
+        base.Undo();
         piece.gameObject.SetActive(true);
+        piece.team.Insert(index, piece);
     }
 }
 

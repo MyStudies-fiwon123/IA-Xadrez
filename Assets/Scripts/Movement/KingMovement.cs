@@ -5,30 +5,33 @@ using UnityEngine;
 
 public class KingMovement : Movement
 {
-    public KingMovement(){
+    public KingMovement(bool maxTeam){
         value = 100000;
+        if (maxTeam)
+            positionValue = AIController.instance.squareTable.kingGold;
+        else
+            positionValue = AIController.instance.squareTable.kingGreen;
     }
 
 	public override List<AvailableMove> GetValidMoves() {
 		List<AvailableMove> moves = new List<AvailableMove>();
-        moves.AddRange(UntilBlockedPath(new Vector2Int(1, 0), true, 1));
-        moves.AddRange(UntilBlockedPath(new Vector2Int(-1, 0), true, 1));
+        UntilBlockedPath(moves, new Vector2Int(1, 0), true, 1);
+        UntilBlockedPath(moves, new Vector2Int(-1, 0), true, 1);
 
-        moves.AddRange(UntilBlockedPath(new Vector2Int(0, 1), true, 1));
-        moves.AddRange(UntilBlockedPath(new Vector2Int(0, -1), true, 1));
+        UntilBlockedPath(moves, new Vector2Int(0, 1), true, 1);
+        UntilBlockedPath(moves, new Vector2Int(0, -1), true, 1);
 
-        moves.AddRange(UntilBlockedPath(new Vector2Int(1, 1), true, 1));
-        moves.AddRange(UntilBlockedPath(new Vector2Int(1, -1), true, 1));
-        moves.AddRange(UntilBlockedPath(new Vector2Int(-1, -1), true, 1));
-        moves.AddRange(UntilBlockedPath(new Vector2Int(-1, 1), true, 1));
+        UntilBlockedPath(moves, new Vector2Int(1, 1), true, 1);
+        UntilBlockedPath(moves, new Vector2Int(1, -1), true, 1);
+        UntilBlockedPath(moves, new Vector2Int(-1, -1), true, 1);
+        UntilBlockedPath(moves, new Vector2Int(-1, 1), true, 1);
 
-        moves.AddRange(Castling());
+        Castling(moves);
         return moves;
 	}
-    List<AvailableMove> Castling(){
-        List<AvailableMove> moves = new List<AvailableMove>();
+    void Castling(List<AvailableMove> moves){
         if (Board.instance.selectedPiece.wasMoved)
-            return moves;
+            return;
 
         Tile temp = CheckRook(new Vector2Int(1, 0));
         if (temp != null){
@@ -39,7 +42,7 @@ public class KingMovement : Movement
             moves.Add(new AvailableMove(temp.pos, MoveType.Casting));
         }
 
-        return moves;
+        return;
     }
 
     private Tile CheckRook(Vector2Int direction)

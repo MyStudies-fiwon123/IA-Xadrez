@@ -63,9 +63,11 @@ public class PieceMovementState : State
 
 
         Tile enemy = Board.instance.tiles[Board.instance.selectedMove.pos + direction];
-        AffectedPiece affectedEnemy = new AffectedPiece();
+        AffectedEnemy affectedEnemy = new AffectedEnemy();
         affectedEnemy.from = affectedEnemy.to = enemy;
         affectedEnemy.piece = enemy.content;
+        affectedEnemy.index = affectedEnemy.piece.team.IndexOf(affectedEnemy.piece);
+        affectedEnemy.piece.team.RemoveAt(affectedEnemy.index);
         changes.Add(affectedEnemy);
         enemy.content.gameObject.SetActive(false);
         enemy.content = null;
@@ -140,25 +142,27 @@ public class PieceMovementState : State
         if (piece.tile.content != null)
         {
             Piece deadPiece = piece.tile.content;
-            AffectedPiece pieceKilled = new AffectedPiece();
+            AffectedEnemy pieceKilled = new AffectedEnemy();
             pieceKilled.piece = deadPiece;
             pieceKilled.from = pieceKilled.to = piece.tile;
             changes.Add(pieceKilled);
-            // Debug.LogFormat("Peça {0} foi morta", deadPiece.transform);
             deadPiece.gameObject.SetActive(false);
+            pieceKilled.index = deadPiece.team.IndexOf(deadPiece);
+            deadPiece.team.RemoveAt(pieceKilled.index);
         }
         piece.tile.content = piece;
         piece.wasMoved = true;
 
-        Vector3 v3Pos = new Vector3(Board.instance.selectedMove.pos.x, Board.instance.selectedMove.pos.y, 0);
         if (skipMovement)
         {
             piece.wasMoved = true;
+            // Vector3 v3Pos = new Vector3(Board.instance.selectedMove.pos.x, Board.instance.selectedMove.pos.y, 0);
             //piece.transform.position = v3Pos;
             tcs.SetResult(true);
         }
         else
         {
+            Vector3 v3Pos = new Vector3(Board.instance.selectedMove.pos.x, Board.instance.selectedMove.pos.y, 0);
             float timing = Vector3.Distance
                 (piece.transform.position, v3Pos) * 0.5f;
 

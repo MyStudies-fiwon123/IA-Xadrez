@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Movement : MonoBehaviour
+public abstract class Movement
 {
     public int value;
     public abstract List<AvailableMove> GetValidMoves();
+    public Dictionary<Vector2Int, int> positionValue;
 
     protected bool IsEnemy(Tile tile)
     {
@@ -22,23 +23,23 @@ public abstract class Movement : MonoBehaviour
         Board.instance.tiles.TryGetValue(position, out tile);
         return tile;
     }
-    protected List<AvailableMove> UntilBlockedPath(Vector2Int direction, bool includeBlocked, int limit)
+    protected void UntilBlockedPath(List<AvailableMove> moves, Vector2Int direction, bool includeBlocked, int limit)
     {
-        List<AvailableMove> moves = new List<AvailableMove>();
         Tile current = Board.instance.selectedPiece.tile;
-        while (current != null && moves.Count < limit){
+        int currentCount = moves.Count;
+        while (current != null && moves.Count < limit+currentCount){
             if (Board.instance.tiles.TryGetValue(current.pos + direction, out current)){
                 if (current.content == null){
                     moves.Add(new AvailableMove(current.pos));
                 } else if (IsEnemy(current)){
                     if (includeBlocked)
-                        moves.Add(new AvailableMove(current.pos));
-                    return moves;
+                        moves.Insert(0, new AvailableMove(current.pos));
+                    return;
                 } else{ // Era um aliado
-                    return moves;
+                    return;
                 }
             }
         }
-        return moves;
+        return;
     }
 }

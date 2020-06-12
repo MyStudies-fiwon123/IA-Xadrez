@@ -25,12 +25,6 @@ public class AIPlayingState : State
         machine.ChangeTo<PieceMovementState>();
     }
     AvailableMove GetMoveType(Ply ply){
-        List<PieceEvaluation> team;
-        if (machine.currentlyPlaying == machine.player1){
-            team = ply.golds;
-        } else
-            team = ply.greens;
-
         List<AvailableMove> moves = Board.instance.selectedPiece.movement.GetValidMoves();
         foreach (AvailableMove m in moves){
             if (m.pos == ply.changes[0].to.pos)

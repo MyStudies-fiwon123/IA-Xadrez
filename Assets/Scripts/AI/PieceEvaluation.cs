@@ -5,5 +5,4 @@ using UnityEngine;
 public class PieceEvaluation
 {
     public Piece piece;
-    public List<AvailableMove> availableMoves;
 }

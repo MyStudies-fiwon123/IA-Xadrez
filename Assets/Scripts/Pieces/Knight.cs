@@ -7,8 +7,9 @@ public class Knight : Piece
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    void Awake()
+    protected override void Start()
     {
-        movement = new KnightMovement();
+        base.Start();
+        movement = new KnightMovement(maxTeam);
     }
 }

@@ -7,8 +7,9 @@ public class Queen : Piece
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    void Awake()
+    protected override void Start()
     {
-        movement = new QueenMovement();
+        base.Start();
+        movement = new QueenMovement(maxTeam);
     }
 }

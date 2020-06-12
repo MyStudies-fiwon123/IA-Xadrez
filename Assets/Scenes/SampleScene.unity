@@ -2795,7 +2795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AIhighlight: {fileID: 781033833}
-  objectivePlyDepth: 2
+  objectivePlyDepth: 4
 --- !u!4 &1615401903
 Transform:
   m_ObjectHideFlags: 0
